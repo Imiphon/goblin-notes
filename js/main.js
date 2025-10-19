@@ -49,14 +49,16 @@ function resetUI() {
   setResetReady(false);
   updatePanelTitle();
   resetState();
-  seqInfoEl.textContent = '—';
+  if (seqInfoEl) seqInfoEl.textContent = '—';
   potentialScoreEl.textContent = state.potential;
   totalScoreEl.textContent = state.totalScore;
 }
 
 function updateSeqInfo() {
   const length = state.baseSeq.length || 0;
-  seqInfoEl.textContent = `${labelForMode(state.mode)} • ${variantLabel(state.variant)} • ${length} Töne`;
+  if (seqInfoEl) {
+    seqInfoEl.textContent = `${labelForMode(state.mode)} • ${variantLabel(state.variant)} • ${length} Töne`;
+  }
 }
 
 function updatePotential() {
@@ -189,7 +191,7 @@ async function resetRound() {
     return;
   } else {
     state.baseSeq = [];
-    seqInfoEl.textContent = '—';
+    if (seqInfoEl) seqInfoEl.textContent = '—';
     updatePanelTitle();
     setReplayReady(false);
     setResetReady(false);

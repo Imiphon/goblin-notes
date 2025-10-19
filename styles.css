@@ -46,6 +46,7 @@ body {
 }
 
 .logo img {
+    margin: 12px;
     height: 40px;
     width: auto;
     display: block;
@@ -296,6 +297,7 @@ button.opt.is-active {
     padding: 14px 18px;
     min-width: 200px;
 }
+
 .accordion::after {
     content: "";
     position: absolute;
