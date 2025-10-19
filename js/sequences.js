@@ -42,13 +42,20 @@ export function makeChromatic(variant) {
 
 export function makeTonal(variant) {
   const motifs = [
-    ['C4', 'C4', 'G4', 'G4', 'A4', 'A4', 'G4'],
-    ['E4', 'E4', 'F4', 'G4', 'G4', 'F4', 'E4', 'D4', 'C4'],
-    ['G4', 'E4', 'E4', 'F4', 'D4', 'D4', 'C4']
+    ['C4', 'C4', 'G4', 'G4', 'A4', 'A4', 'G4', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['C4', 'E4', 'F4', 'G4', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['E4', 'E4', 'F4', 'G4', 'G4', 'E4', 'C4', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['G4', 'E4', 'E4', 'F4', 'F4', 'D4', 'D4', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['C3', 'D3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['C4', 'G3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['C4', 'G3', 'A3', 'G3', 'E3', 'F3', 'D3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['A4', 'G3', 'F3', 'G3', 'E3', 'F3', 'C3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+    ['E3', 'C3', 'F3', 'C3', 'G3', 'F3', 'D3', 'G3', 'C4', 'B3', 'D4', 'C4'],
+
   ];
-  let targetLength = 8;
+  let targetLength = 7;
+  if (variant === 'kids-9') targetLength = 9;
   if (variant === 'kids-12') targetLength = 12;
-  if (variant === 'kids-16') targetLength = 16;
   const sequence = [];
   while (sequence.length < targetLength) {
     const motif = motifs[Math.floor(Math.random() * motifs.length)];

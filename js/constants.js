@@ -16,9 +16,9 @@ export const SELECTION_VARIANT_TITLES = {
   '12-up': '13 Töne chrom ↑',
   '12-down': '13 Töne chrom ↓',
   '25-updown': '25 Töne chrom',
-  'kids-8': '8 Töne tonal',
+  'kids-7': '7 Töne tonal',
+  'kids-9': '9 Töne tonal',
   'kids-12': '12 Töne tonal',
-  'kids-16': '16 Töne tonal',
   '7': '7 Töne atonal',
   '12': '12 Töne atonal',
   '16': '16 Töne atonal'
