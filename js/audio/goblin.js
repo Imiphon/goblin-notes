@@ -90,6 +90,9 @@ export function showGoblin(state, playAudio = true) {
               instance.removeEventListener('pause', cleanup);
               instance.removeEventListener('error', cleanup);
               if (currentAudio === instance) currentAudio = null;
+              if (generation === playbackGeneration) {
+                setGoblinVisual(GOBLIN_STATES.hello);
+              }
               resolve();
             };
             instance.addEventListener('ended', cleanup, { once: true });
@@ -107,6 +110,9 @@ export function showGoblin(state, playAudio = true) {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio = null;
+  }
+  if (state !== 'hello') {
+    setGoblinVisual(GOBLIN_STATES.hello);
   }
   pendingPlayback = Promise.resolve();
   return pendingPlayback;

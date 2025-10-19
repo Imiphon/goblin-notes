@@ -13,8 +13,8 @@ export const KEY_RANGE = { min: 'C2', max: 'C5' };
 
 export const SELECTION_VARIANT_TITLES = {
   '5-any': '5 Töne chrom',
-  '12-up': '12 Töne chrom ↑',
-  '12-down': '12 Töne chrom ↓',
+  '12-up': '13 Töne chrom ↑',
+  '12-down': '13 Töne chrom ↓',
   '25-updown': '25 Töne chrom',
   'kids-8': '8 Töne tonal',
   'kids-12': '12 Töne tonal',

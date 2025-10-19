@@ -1,9 +1,9 @@
 :root {
     --bg: #0f1115;
     --panel: #171a21;
-    --ink: #e8ecf1;
+    --ink: #f5deb3;
     --muted: #9aa3af;
-    --accent: #5eead4;
+    --accent: #c5cd99;
     --primary: #7dd3fc;
     --danger: #fca5a5;
     --good: #86efac;
@@ -375,7 +375,7 @@ button.opt.is-active {
 .score {
     display: grid;
     gap: 6px;
-    color: var(--muted)
+    color: var(--ink)
 }
 
 .score strong {

@@ -16,9 +16,9 @@ function byPitch(a, b) {
 }
 
 export function makeChromatic(variant) {
-  const up12 = linearNotes('C4', 'B4');
-  if (variant === '12-up') return up12;
-  if (variant === '12-down') return [...up12].reverse();
+  const up13 = linearNotes('C4', 'C5');
+  if (variant === '12-up') return up13;
+  if (variant === '12-down') return [...up13].reverse();
   if (variant === '5-any') {
     const pool = linearNotes('C2', 'C5');
     const choice = ['up', 'down', 'updown'][Math.floor(Math.random() * 3)];
@@ -34,11 +34,10 @@ export function makeChromatic(variant) {
     return [pool[start], pool[start + 1], pool[start + 2], pool[start + 1], pool[start]];
   }
   if (variant === '25-updown') {
-    const up = linearNotes('C4', 'C5');
-    const down = [...up].reverse().slice(1);
-    return up.concat(down);
+    const down = [...up13].reverse().slice(1);
+    return up13.concat(down);
   }
-  return up12;
+  return up13;
 }
 
 export function makeTonal(variant) {
