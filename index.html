@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Goblin Notes</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <a href="#" id="logo-link" aria-label="Logo-Link">
+                <img src="./assets/images/goblin/goblin-neutral.png" alt="Goblin Logo" />
+            </a>
+        </div>
+        <h1 class="title">Kobold Ton</h1>
+        <button class="menu-btn" aria-label="Menü öffnen">☰</button>
+    </header>
+
+    <main class="app-main">
+        <!-- Sequenz-Auswahl -->
+        <section class="panel tasks" id="sequencePanel">
+            <button type="button" class="tasks-trigger" id="tasksTrigger">
+                <span class="panel-label">Tonfolge</span>
+                <h2 class="panel-title" id="panelTitle" data-default="wählen">wählen</h2>
+            </button>
+
+            <div class="task-overlay" id="taskOverlay">
+                <div class="accordion">
+                    <button type="button" class="accordion-label">Chromatik</button>
+                    <div class="option-list">
+                        <button class="opt" data-mode="chromatic" data-variant="5-any">5 Töne chrom</button>
+                        <button class="opt" data-mode="chromatic" data-variant="12-up">12 Töne chrom ↑</button>
+                        <button class="opt" data-mode="chromatic" data-variant="12-down">12 Töne chrom ↓</button>
+                        <button class="opt" data-mode="chromatic" data-variant="25-updown">25 Töne chrom</button>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button type="button" class="accordion-label">Tonal</button>
+                    <div class="option-list">
+                        <button class="opt" data-mode="tonal" data-variant="kids-8">8 Töne tonal</button>
+                        <button class="opt" data-mode="tonal" data-variant="kids-12">12 Töne tonal</button>
+                        <button class="opt" data-mode="tonal" data-variant="kids-16">16 Töne tonal</button>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button type="button" class="accordion-label">Atonal</button>
+                    <div class="option-list">
+                        <button class="opt" data-mode="atonal" data-variant="7">7 Töne atonal</button>
+                        <button class="opt" data-mode="atonal" data-variant="12">12 Töne atonal</button>
+                        <button class="opt" data-mode="atonal" data-variant="16">16 Töne atonal</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tempo + Steuerung -->
+        <section class="panel controls">
+            <div class="tempo">
+                <label for="tempoRange">Tempo (BPM)</label>
+                <input id="tempoRange" type="range" min="60" max="400" value="120" />
+                <output id="tempoOut">120</output>
+            </div>
+
+            <div class="play-controls">
+                <button id="playCorrect" class="primary">Nochmal hören - mit Punktabzug</button>
+                <button id="playGoblin" class="accent">👹 Kobold spielt!</button>
+                <button id="resetRound" class="ghost">↺ Neue Runde</button>
+            </div>
+        </section>
+
+        <!-- Goblin + Score -->
+        <section class="panel status">
+            <div class="goblin">
+                <img id="goblinImg" src="./assets/images/goblin/goblin-neutral.png" alt="Goblin Reaktion" />
+            </div>
+            <div class="score">
+                <div>Gesamt-Score: <strong id="totalScore">0</strong></div>
+                <div>Aktuelles Potenzial: <strong id="potentialScore">0</strong></div>
+                <!-- <div>Tonfolge: <span id="seqInfo">—</span></div> -->
+            </div>
+        </section>
+
+        <!-- Klaviertastatur -->
+        <section class="panel keyboard-panel">
+            <h2 class="panel-title">Klaviertastatur</h2>
+            <div id="keyboard" class="keyboard" aria-label="Klaviertastatur (C2–C5)"></div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <small>©️ Melopoiia - v0.1 – Entwurf</small>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
