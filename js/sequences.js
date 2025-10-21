@@ -41,37 +41,52 @@ export function makeChromatic(variant) {
 }
 
 export function makeTonal(variant) {
-  const motifs = [
-    ['C4', 'C4', 'G4', 'G4', 'A4', 'A4', 'G4', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['C4', 'E4', 'F4', 'G4', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['E4', 'E4', 'F4', 'G4', 'G4', 'E4', 'C4', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['G4', 'E4', 'E4', 'F4', 'F4', 'D4', 'D4', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['C3', 'D3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['C4', 'G3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['C4', 'G3', 'A3', 'G3', 'E3', 'F3', 'D3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['A4', 'G3', 'F3', 'G3', 'E3', 'F3', 'C3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-    ['E3', 'C3', 'F3', 'C3', 'G3', 'F3', 'D3', 'G3', 'C4', 'B3', 'D4', 'C4'],
-
-  ];
-  let targetLength = 7;
-  if (variant === 'kids-9') targetLength = 9;
-  if (variant === 'kids-12') targetLength = 12;
+  const scale = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+  let targetLen = 7;
+  if (variant === 'kids-5') targetLen = 5;
+  if (variant === 'kids-12') targetLen = 12;
+  else if (variant === 'kids-9') targetLen = 9;
   const sequence = [];
-  while (sequence.length < targetLength) {
-    const motif = motifs[Math.floor(Math.random() * motifs.length)];
-    sequence.push(...motif);
+  while (sequence.length < targetLen) {
+    const step = scale[Math.floor(Math.random() * scale.length)];
+    sequence.push(step);
   }
-  return sequence.slice(0, targetLength);
+  return sequence.slice(0, targetLen);
 }
 
 export function makeAtonal(variant) {
-  const pool = linearNotes('C2', 'C5');
-  const length = parseInt(variant, 10) || 12;
-  const result = [];
-  for (let i = 0; i < length; i += 1) {
-    result.push(pool[Math.floor(Math.random() * pool.length)]);
+  const match = variant.match(/^atonal-(\d+)-(easy|hard)$/);
+  if (!match) {
+    const fallbackLength = parseInt(variant, 10) || 12;
+    const fallbackPool = linearNotes('C2', 'C5');
+    return Array.from({ length: fallbackLength }, () => fallbackPool[Math.floor(Math.random() * fallbackPool.length)]);
   }
-  return result;
+
+  const length = parseInt(match[1], 10);
+  const difficulty = match[2];
+  const maxSpan = difficulty === 'easy' ? 7 : 14; // semitone distance between lowest and highest note
+
+  const pool = linearNotes('C2', 'C5');
+  const pitches = pool.map(pitchIndex);
+  const maxPitch = pitches[pitches.length - 1];
+
+  // choose a window that fits within the allowed span
+  const startOptions = [];
+  for (let i = 0; i < pitches.length; i += 1) {
+    if (pitches[i] + maxSpan <= maxPitch) {
+      startOptions.push(i);
+    }
+  }
+  const lowIndex = startOptions[Math.floor(Math.random() * startOptions.length)];
+  const lowPitch = pitches[lowIndex];
+  const highPitch = lowPitch + maxSpan;
+  const allowedNotes = pool.filter((note, idx) => pitches[idx] >= lowPitch && pitches[idx] <= highPitch);
+
+  const sequence = [];
+  while (sequence.length < length) {
+    sequence.push(allowedNotes[Math.floor(Math.random() * allowedNotes.length)]);
+  }
+  return sequence;
 }
 
 export function generateBaseSequence(mode, variant, previous) {

@@ -10,6 +10,8 @@ export const state = {
   correctPlays: 0,
   totalScore: 0,
   potential: 0,
+  maxPotential: 0,
+  potentialDebt: 0,
   locked: false,
   solved: false
 };

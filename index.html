@@ -10,10 +10,23 @@
 </head>
 
 <body>
+    <div id="bootOverlay" class="boot-overlay" role="status" aria-live="polite">
+        <div class="boot-overlay__inner">
+            <div class="boot-spinner" aria-hidden="true"></div>
+            <p id="bootStatus" class="boot-status">Starte Goblin Notes …</p>
+            <div class="boot-progress" aria-hidden="true">
+                <div id="bootProgressBar" class="boot-progress__bar"></div>
+            </div>
+            <p id="bootHint" class="boot-hint" hidden>Tippe einmal, damit der Kobold hallo sagen darf.</p>
+        </div>
+    </div>
+    <div id="orientationHint" class="orientation-hint" role="status" aria-live="polite">
+        <span>Für die beste Ansicht bitte ins Querformat drehen.</span>
+    </div>
     <header class="app-header">
         <div class="logo">
             <a href="https://melopoiia.com/" id="logo-link" aria-label="Logo-Link">
-                <img src="./assets/images/logo-wheat.png" alt="Goblin Logo" />
+                <img src="./assets/images/logo-wheat.png" data-asset-src="assets/images/logo-wheat.png" alt="Goblin Logo" />
             </a>
         </div>
         <h1 class="title">Kobold Ton</h1>
@@ -21,20 +34,28 @@
     </header>
 
     <main class="app-main">
+
+        <div class="all-panel-frame">
+
+<div class="panel-frame">
+
         <!-- Sequenz-Auswahl -->
         <section class="panel tasks" id="sequencePanel">
-            <button type="button" class="tasks-trigger" id="tasksTrigger">
-                <span class="panel-label">Tonfolge</span>
-                <h2 class="panel-title" id="panelTitle" data-default="wählen">wählen</h2>
-            </button>
-
+            <div class="tasks-header">
+                <button type="button" class="tasks-trigger" id="tasksTrigger">
+                    <span class="panel-label">Tonfolge</span>
+                    <h2 class="panel-title" id="panelTitle" data-default="wählen">wählen</h2>
+                </button>
+                <button type="button" class="tasks-info-btn" id="tasksInfoBtn" aria-haspopup="dialog" aria-controls="tasksInfoPopup" aria-expanded="false">Info</button>
+            </div>
             <div class="task-overlay" id="taskOverlay">
+                <span class="info">Suche eine Tonfolge, aus der der Kobold einen Ton verändert oder klaut.</span>
                 <div class="accordion">
                     <button type="button" class="accordion-label">Chromatik</button>
                     <div class="option-list">
                         <button class="opt" data-mode="chromatic" data-variant="5-any">5 Töne chrom</button>
-                        <button class="opt" data-mode="chromatic" data-variant="12-up">12 Töne chrom ↑</button>
-                        <button class="opt" data-mode="chromatic" data-variant="12-down">12 Töne chrom ↓</button>
+                        <button class="opt" data-mode="chromatic" data-variant="12-up">13 Töne chrom ↑</button>
+                        <button class="opt" data-mode="chromatic" data-variant="12-down">13 Töne chrom ↓</button>
                         <button class="opt" data-mode="chromatic" data-variant="25-updown">25 Töne chrom</button>
                     </div>
                 </div>
@@ -42,6 +63,7 @@
                 <div class="accordion">
                     <button type="button" class="accordion-label">Tonal</button>
                     <div class="option-list">
+                        <button class="opt" data-mode="tonal" data-variant="kids-5">5 Töne tonal</button>
                         <button class="opt" data-mode="tonal" data-variant="kids-7">7 Töne tonal</button>
                         <button class="opt" data-mode="tonal" data-variant="kids-9">9 Töne tonal</button>
                         <button class="opt" data-mode="tonal" data-variant="kids-12">12 Töne tonal</button>
@@ -51,14 +73,41 @@
                 <div class="accordion">
                     <button type="button" class="accordion-label">Atonal</button>
                     <div class="option-list">
-                        <button class="opt" data-mode="atonal" data-variant="7">7 Töne atonal</button>
-                        <button class="opt" data-mode="atonal" data-variant="12">12 Töne atonal</button>
-                        <button class="opt" data-mode="atonal" data-variant="16">16 Töne atonal</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-5-easy">5 Töne (leicht)</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-5-hard">5 Töne (schwer)</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-7-easy">7 Töne (leicht)</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-7-hard">7 Töne (schwer)</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-12-easy">12 Töne (leicht)</button>
+                        <button class="opt" data-mode="atonal" data-variant="atonal-12-hard">12 Töne (schwer)</button>
                     </div>
+                </div>
+            </div>
+            <div class="tasks-info-popup" id="tasksInfoPopup" role="dialog" aria-modal="false" aria-labelledby="tasksInfoHeading" hidden>
+                <div class="tasks-info-inner">
+                    <div class="tasks-info-head">
+                        <h3 class="tasks-info-title" id="tasksInfoHeading">Spielbeschreibung</h3>
+                        <button type="button" class="tasks-info-close" id="tasksInfoClose" aria-label="Infofenster schließen">X</button>
+                    </div>
+                    <p>Wähle zunächst eine Tonfolge (beginne am besten mit 5 Tönen bei Chromatik oder Tonal). Es erklingt eine Tonfolge.</p>
+                    <p>Du kannst die Tonfolge jederzeit wieder hören. Die klingenden Töne leuchten dabei kurz auf, doch das gibt einen Punktabzug. Solange der Kobold noch nicht gespielt hat, kannst du auf der Tastatur auch die Töne nachspielen.</p>
+                    <p>Dann lass den Kobold spielen. Dieser lässt einen Ton aus oder spielt stattdessen einen anderen Ton. Klicke auf der Tastatur den fehlenden Ton und gewinne die Runde oder starte eine neue Runde.</p>
                 </div>
             </div>
         </section>
 
+
+        <!-- Goblin + Score -->
+        <section class="panel status">
+            <div class="goblin">
+                <img id="goblinImg" src="./assets/images/goblin/hello.png" data-asset-src="assets/images/goblin/hello.png" alt="Goblin Reaktion" />
+            </div>
+            <div class="score">
+                <div class="info no-wrap">Tempo x Tonfolge = Gewinn</div>
+                <div>Gesamt-Score: <strong id="totalScore">0</strong></div>
+                <div>möglicher Gewinn: <strong id="potentialScore">0</strong></div>                
+            </div>
+        </section>
+     </div>
         <!-- Tempo + Steuerung -->
         <section class="panel controls">
             <div class="tempo">
@@ -73,17 +122,8 @@
                 <button id="resetRound" class="ghost">↺ Neue Runde</button>
             </div>
         </section>
-
-        <!-- Goblin + Score -->
-        <section class="panel status">
-            <div class="goblin">
-                <img id="goblinImg" src="./assets/images/goblin/goblin-neutral.png" alt="Goblin Reaktion" />
-            </div>
-            <div class="score">
-                <div>Gesamt-Score: <strong id="totalScore">0</strong></div>
-                <div>Aktuelles Potenzial: <strong id="potentialScore">0</strong></div>                
-            </div>
-        </section>
+   
+        </div>
 
         <!-- Klaviertastatur -->
         <section class="panel keyboard-panel">

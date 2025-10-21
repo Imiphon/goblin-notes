@@ -1,4 +1,4 @@
-import { playNote } from './audio/piano.js';
+import { playNote, unlockPianoContext } from './audio/piano.js';
 import { linearNotes } from './utils/notes.js';
 
 let keyboardContainer = null;
@@ -29,11 +29,13 @@ export function buildKeyboard(container, range, { onNote } = {}) {
       const white = document.createElement('div');
       white.className = 'key white';
       white.dataset.note = note;
-      white.innerHTML = `<div class="label">${note}</div>`;
+      white.innerHTML = '';
+      white.setAttribute('aria-label', note);
       container.appendChild(white);
     }
   });
   const whites = Array.from(container.querySelectorAll('.key.white'));
+  container.style.setProperty('--white-key-count', whites.length.toString());
   notes.forEach((note, idx) => {
     if (note.includes('#')) {
       const parentIndex = findPrevWhiteIndex(notes, idx);
@@ -42,7 +44,8 @@ export function buildKeyboard(container, range, { onNote } = {}) {
       const black = document.createElement('div');
       black.className = 'key black';
       black.dataset.note = note;
-      black.innerHTML = `<div class="label">${note}</div>`;
+      black.innerHTML = '';
+      black.setAttribute('aria-label', note);
       parent.appendChild(black);
     }
   });
@@ -52,6 +55,7 @@ export function buildKeyboard(container, range, { onNote } = {}) {
     if (!target) return;
     const note = target.dataset.note;
     flashKey(target);
+    void unlockPianoContext(true).catch(() => {});
     playNote(note, 0.95);
     if (typeof onNote === 'function') onNote(note);
   };

@@ -16,12 +16,16 @@ export const SELECTION_VARIANT_TITLES = {
   '12-up': '13 Töne chrom ↑',
   '12-down': '13 Töne chrom ↓',
   '25-updown': '25 Töne chrom',
+  'kids-5': '5 Töne tonal',
   'kids-7': '7 Töne tonal',
   'kids-9': '9 Töne tonal',
   'kids-12': '12 Töne tonal',
-  '7': '7 Töne atonal',
-  '12': '12 Töne atonal',
-  '16': '16 Töne atonal'
+  'atonal-5-easy': '5 Töne atonal leicht',
+  'atonal-5-hard': '5 Töne atonal schwer',
+  'atonal-7-easy': '7 Töne atonal leicht',
+  'atonal-7-hard': '7 Töne atonal schwer',
+  'atonal-12-easy': '12 Töne atonal leicht',
+  'atonal-12-hard': '12 Töne atonal schwer'
 };
 
 export const GOBLIN_STATES = {
